@@ -1,0 +1,40 @@
+# Checklist
+
+- Full stack app
+- ~~REST API~~
+- ~~Express.js~~
+- ~~Node.js~~
+- ~~CRUD~~
+- ~~postgreSQL~~
+- ~~ORM sequelize~~
+- React.js
+- State Management
+- ~~Middleware~~
+- Social Media Login
+- Third party API (min 2)
+    - API key / token
+    - Package / library based
+    - https://github.com/public-apis/public-apis
+    - https://rapidapi.com/search/
+- Theme: Chill
+- Use Github
+- Client-Server
+- Testing
+- API doc
+- Main features:
+    - Realtime (Firebase, Socket)
+    - Mail sending (Nodemailer, Restdb mail)
+    - Upload file (Multer, Single-File*, Multiple-File)
+    - Social Media Sign In (Facebook, Twitter, Github, Google)
+    - Payment Gateway (Midtrans, Xendit, Fastpay, Stripe)
+    - Database: NoSQL (Firebase firestore, MongoDB)
+    - Biometrics (Face & Voice Recognition, text-to-speech, speech-to-text)
+    - 3D/VR Library (Three.js, A-Frame)
+    - Responsive Design
+- Deploy
+- Fork, do not push to main during development, create branch for each feature
+- Pitch 5 min
+    - Name
+    - Why make this?
+    - Features?
+    - Issues encountered during development?

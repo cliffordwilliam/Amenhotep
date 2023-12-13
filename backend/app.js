@@ -9,9 +9,12 @@ const homeRouter = require('./routers/homeRouter');
 // need the handleError
 const Middleware = require('./middleware');
 
+const cors = require('cors');
+
 
 // create app
 const app = express();
+app.use(cors());
 
 app.use(express.urlencoded({extended:true})); // req.body
 app.use(express.json()); // for reading jest req

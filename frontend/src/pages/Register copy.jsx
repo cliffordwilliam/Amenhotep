@@ -12,20 +12,18 @@ export default function Register() {
 
   const submitForm = (e) => {
     e.preventDefault();
+    const options = {
+      data: {
+        email,
+        password,
+        username,
+      },
+    };
 
     dispatch(APIrequest({
       method: "POST",
       apiEndpoint: `${c.localBaseUrl}/user/register`,
-      options: {
-        headers: {
-          Authorization: `Bearer ${localStorage.token}`,
-        },
-        data: {
-          email,
-          password,
-          username,
-        },
-      },
+      options,
       updateContentOnSuccess: true,
     }));
   };

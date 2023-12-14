@@ -2,6 +2,7 @@ const {User} = require("../models");
 const Helper = require("../helper");
 const Utils = require("../utils");
 const {Op} = require("sequelize");
+const { OAuth2Client } = require('google-auth-library');
 
 
 module.exports = class UserController {
@@ -46,6 +47,42 @@ module.exports = class UserController {
                 status: 200,
                 msg: `User successfully logged in.`, 
                 token, 
+                user: userWihoutPassword,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+    static async googleLogin(req,res,next) {
+        try {
+            const { token } = req.headers;
+            const client = new OAuth2Client();
+            const ticket = await client.verifyIdToken({
+                idToken: token,
+                audience: process.env.GOOGLE_CLIENT_ID,
+            });
+            const payload = ticket.getPayload();
+            const [user, created] = await User.findOrCreate({
+                where: {
+                    username: payload.name
+                },
+                defaults: {
+                    username: payload.name,
+                    email: payload.email,
+                    password: "password_google"
+                },
+                hooks: false
+            })
+            const access_token = Helper.payloadToToken({
+                id: user.id,
+                username: user.username,
+            })
+            const foundUser = await Helper.findOne(User,{email:payload.email}, 'User not found. Please check your email or register.',401);
+            const userWihoutPassword = Helper.sanitizeUser(foundUser)
+            res.status(200).json({
+                status: 200,
+                msg: `User successfully logged in.`, 
+                token: access_token, 
                 user: userWihoutPassword,
             });
         } catch (error) {
@@ -107,8 +144,12 @@ module.exports = class UserController {
             const {id} = req.loggedInUser;
             // unpack the body
             const {username,password,profile_picture,bio,credit} = req.body;
+            if (!password) Helper.customError("Password cannot be empty.",400)
+            if (password.length < 3 || password.length > 255) Helper.customError("Password must be between 3 and 255 characters.",400)
+            // hash first before storing to db
+            const hashedPassword = await Helper.hashPassword(password)
             // use body to update the user data
-            const [rowsUpdated, [updatedUser]] = await User.update({username,password,profile_picture,bio,credit},{where:{id},returning:true});
+            const [rowsUpdated, [updatedUser]] = await User.update({username,password:hashedPassword,profile_picture,bio,credit},{where:{id},returning:true});
             // res status
             res.status(200).json({
                 status: 200,
@@ -124,6 +165,7 @@ module.exports = class UserController {
             // get id from the loggedInUser
             const {id} = req.loggedInUser;
             // no file in body? throw (need middleware to have req.file)
+            console.log(req.file);
             if (!req.file) Helper.customError('Profile picture image file is required.',400);
             // req.file -> base64
             const imgBase64 = req.file.buffer.toString("base64");

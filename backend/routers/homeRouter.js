@@ -26,6 +26,7 @@ const userDrinkRouter = require("./userDrinkRouter");
 // free
 homeRouter.post("/user/login", UserController.login);
 homeRouter.post("/user/register", UserController.post);
+homeRouter.post("/user/googleLogin", UserController.googleLogin)
 
 // token guard
 homeRouter.use(Middleware.tokenGuard);

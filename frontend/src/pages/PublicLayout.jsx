@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 
-import Navbar from "../components/Navbar.jsx";
+import PublicNavbar from '../components/PublicNavbar.jsx'
 import Footer from "../components/Footer.jsx";
 
-export default function Layout() {
+export default function PublicLayout() {
 
   return (
     <>
-      <Navbar />
+    <PublicNavbar/>
       <Outlet />
       <Footer />
     </>

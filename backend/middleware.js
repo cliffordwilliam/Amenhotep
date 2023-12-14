@@ -30,8 +30,9 @@ module.exports = class Middleware {
             const token = req.headers.authorization.split(" ")[1];
             // token -> payload
             const payload = await Helper.tokenToPayload(token);
+            console.log(payload);
             // payload owner dont exists? throw
-            const user = await Helper.findOne(User,{email:payload.email},"Unauthorized. Your access token is invalid.",401);
+            const user = await Helper.findOne(User,{username:payload.username},"Unauthorized. Your access token is invalid.",401);
             // grab user data (excluding password)
             const {id,username,email,profile_picture,bio,credit} = user;
             // add user data to req.loggedInUser

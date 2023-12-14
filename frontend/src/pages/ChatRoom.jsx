@@ -3,14 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { APIrequest } from "../Store/apiSlice";
 import c from "../const";
 import io from "socket.io-client";
+import { useParams } from 'react-router-dom';
 
 
 
 export default function VelvetRoom() {
-  const socket = io.connect("http://localhost:3000");
+  const { id } = useParams();
+  const socket = io.connect(c.localBaseUrl); // c.AmenhotepBaseUrl (LIVE)
   useEffect(() => {
     // Establish a WebSocket connection to your backend
-    socket.emit("join_room", 1);
+    socket.emit("join_room", +id);
   }, []);
 
   const dispatch = useDispatch();
@@ -22,7 +24,7 @@ export default function VelvetRoom() {
     if (data) {
       // Handle success
       setChats(data.chats);
-      socket.emit("send_message", data={chats:data.chats,room:1});
+      socket.emit("send_message", data={chats:data.chats,room:+id});
     } else {
       // Handle error
       // (nothing specific to do in this case)
@@ -35,7 +37,6 @@ export default function VelvetRoom() {
     socket.on(
       "receive_message",
       (chats) => {
-        console.log(chats);
         setChats(chats);
       },
       [socket]
@@ -50,7 +51,7 @@ export default function VelvetRoom() {
       dispatch(
         APIrequest({
           method: "GET",
-          apiEndpoint: `${c.localBaseUrl}/chat/1`,
+          apiEndpoint: `${c.localBaseUrl}/chat/${+id}`,
           options: {
             headers: {
               Authorization: `Bearer ${localStorage.token}`,
@@ -78,7 +79,7 @@ export default function VelvetRoom() {
             Authorization: `Bearer ${localStorage.token}`,
           },
           data: {
-            chat_room_id: 1, // Hardcoded for the Velvet Room
+            chat_room_id: +id,
             message: message,
           },
         },
@@ -95,7 +96,7 @@ export default function VelvetRoom() {
     dispatch(
       APIrequest({
         method: "GET",
-        apiEndpoint: `${c.localBaseUrl}/chat/1`,
+        apiEndpoint: `${c.localBaseUrl}/chat/${+id}`,
         options: {
           headers: {
             Authorization: `Bearer ${localStorage.token}`,
@@ -106,9 +107,17 @@ export default function VelvetRoom() {
     );
   }, [dispatch]);
 
+  const chatRoomTitles = {
+    1: 'Velvet Room',
+    2: 'Tartarus Lounge',
+    3: 'Duodecim Pub',
+  };
+
+  const chatRoomTitle = chatRoomTitles[+id];
+
   return (
     <div>
-      <h1>Velvet Room Chats</h1>
+      <h1>{chatRoomTitle}</h1>
       {chats.length === 0 ? (
         <p>Loading...</p>
       ) : (

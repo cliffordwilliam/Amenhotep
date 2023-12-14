@@ -66,6 +66,9 @@ console.log(localStorage.profile_picture.length);
           <Link to="/chatRooms">Chat rooms</Link>
         </li>
         <li>
+          <Link to="/spotify">Spotify</Link>
+        </li>
+        <li>
           {/* Conditionally render the profile picture */}
           {localStorage.profile_picture.length !== 0 && (
             <img

@@ -1,4 +1,4 @@
-import { createBrowserRouter, redirect } from "react-router-dom";
+import { createBrowserRouter, redirect,useNavigate  } from "react-router-dom";
 
 import Layout from "./pages/Layout";
 import PublicLayout from "./pages/PublicLayout";
@@ -11,7 +11,9 @@ import UsersDetail from "./pages/UserDetail";
 import MyDetail from "./pages/MyDetail";
 import EditMyDetail from "./pages/EditMyDetail";
 import ChatRooms from "./pages/ChatRooms";
-import VelvetRoom from "./pages/VelvetRoom";
+import ChatRoom from "./pages/ChatRoom";
+import Spotify from "./pages/Spotify";
+
 
 const router = createBrowserRouter([
   {
@@ -48,16 +50,12 @@ const router = createBrowserRouter([
         element: <ChatRooms />
       },
       {
-        path: '/chatRoom/1',
-        element: <VelvetRoom />
+        path: '/chatRoom/:id',
+        element: <ChatRoom />
       },
       {
-        path: '/chatRooms/2',
-        // element: <ChatRooms />
-      },
-      {
-        path: '/chatRooms/3',
-        // element: <ChatRooms />
+        path: '/spotify',
+        element: <Spotify />
       },
     ]
   },

@@ -122,7 +122,7 @@ export default function VelvetRoom() {
         <p>Loading...</p>
       ) : (
         <>
-            <ul>
+            <ul className="card m">
             {chats.map((chat) => (
                 <li key={chat.id}>
                 <div>

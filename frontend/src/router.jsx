@@ -13,6 +13,9 @@ import EditMyDetail from "./pages/EditMyDetail";
 import ChatRooms from "./pages/ChatRooms";
 import ChatRoom from "./pages/ChatRoom";
 import Spotify from "./pages/Spotify";
+import Drinks from "./pages/Drinks";
+import Posts from "./pages/Posts";
+import PostDetail from "./pages/PostDetail";
 
 
 const router = createBrowserRouter([
@@ -32,6 +35,18 @@ const router = createBrowserRouter([
       {
         path: '/users',
         element: <Users />
+      },
+      {
+        path: '/drinks',
+        element: <Drinks />
+      },
+      {
+        path: '/posts',
+        element: <Posts />
+      },
+      {
+        path: '/postDetail/:id',
+        element: <PostDetail />
       },
       {
         path: '/user/detail/:id',

@@ -65,9 +65,9 @@ useEffect(()=>{
 
   return (
     <>
-        <p>{code.code}</p>
+        {/* <p>{code.code}</p> */}
         <h1>Spotify dashboard</h1>
-        <form>
+        <form className="card flex-0">
           <label>
             Search for tracks
             <input type="text" value={search} onChange={(e)=>{setSearch(e.target.value)}} />
@@ -75,9 +75,9 @@ useEffect(()=>{
         </form>
         {/* Display the search results */}
       {tracks.length > 0 ? (
-        <ul>
+        <ul className="h-flex">
           {tracks.map((track) => (
-            <li key={track.uri} onClick={(e)=>{onTrackClicked(e, track.uri)}}>
+            <li className="card" key={track.uri} onClick={(e)=>{onTrackClicked(e, track.uri)}}>
               {track.artist} - {track.title}
               <br />
               <img src={track.albumUrl} alt={`Album cover for ${track.title}`} />

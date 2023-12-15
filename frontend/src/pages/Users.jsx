@@ -5,7 +5,7 @@ import { APIrequest } from '../Store/apiSlice';
 import c from "../const";
 import Modal from "../components/Modal";
 
-export default function Register() {
+export default function Users() {
   const [currentPage, setCurrentPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [searchUsername, setSearchUsername] = useState('');
@@ -43,7 +43,9 @@ export default function Register() {
   return (
     <>
       <h1>All users</h1>
-      <div>
+      <div className="p c">
+
+      <div className="h-flex">
         {/* Search input */}
         <input
           type="text"
@@ -60,7 +62,7 @@ export default function Register() {
         <button onClick={() => setCurrentPage((prev) => prev + 1)}>Next</button>
       </div>
 
-      <div>
+      <div className="h-flex">
         {/* Limit dropdown (for changing items per page) */}
         <label htmlFor="limit">Items per page:</label>
         <select id="limit" value={limit} onChange={(e) => setLimit(e.target.value)}>
@@ -85,16 +87,24 @@ export default function Register() {
         </select>
       </div>
 
+      </div>
+
       {/* Display the users if data is available */}
       {users.length === 0 ? (
         <p>Loading...</p>
       ) : (
         <>
-          <ul>  
+          <ul className="h-flex">  
             {users.map(user => (
-                <li key={user.id}>
+                <li className="card" key={user.id}>
                   <strong>{user.username}</strong>
-                  <p>Email: {user.email}</p>
+                  {/* Conditionally render the profile picture */}
+                  {user.profile_picture && (
+                    <img
+                      src={user.profile_picture}
+                      alt="Profile Picture"
+                    />
+                  )}
                   <Link to={`/user/detail/${user.id}`}>
                     <button>View Details</button>
                   </Link>

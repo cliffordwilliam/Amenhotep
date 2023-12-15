@@ -104,7 +104,7 @@ export default function Login() {
   return (
     <>
       <h1>Login Form</h1>
-      <form>
+      <form className="card flex-0">
         <label htmlFor="email">Email:</label>
         <input type="email" id="email" name="email" value={email} onChange={(e) => setStateEmail(e.target.value)} required />
 
@@ -113,7 +113,9 @@ export default function Login() {
 
         <button type="button" onClick={submitForm}>Login</button>
       </form>
+      <div className="google"> 
       <GoogleLogin onSuccess={googleLogin} />
+      </div>
       {<Modal />}
     </>
   );

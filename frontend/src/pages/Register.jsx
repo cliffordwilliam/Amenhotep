@@ -33,7 +33,7 @@ export default function Register() {
   return (
     <>
       <h1>Registration Form</h1>
-      <form>
+      <form className="card flex-0">
         <label htmlFor="name">Name:</label>
         <input type="text" id="name" name="name" value={username} onChange={(e) => setUsername(e.target.value)} required />
 

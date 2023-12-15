@@ -60,6 +60,12 @@ console.log(localStorage.profile_picture.length);
           <Link to="/users">Users</Link>
         </li>
         <li>
+          <Link to="/drinks">Drinks</Link>
+        </li>
+        <li>
+          <Link to="/posts">Posts</Link>
+        </li>
+        <li>
           <Link to="/myDetail">My detail</Link>
         </li>
         <li>
@@ -68,9 +74,9 @@ console.log(localStorage.profile_picture.length);
         <li>
           <Link to="/spotify">Spotify</Link>
         </li>
-        <li>
+        <li className='lo'>
           {/* Conditionally render the profile picture */}
-          {localStorage.profile_picture.length !== 0 && (
+          {localStorage.profile_picture && (
             <img
               src={localStorage.profile_picture}
               alt="Profile Picture"

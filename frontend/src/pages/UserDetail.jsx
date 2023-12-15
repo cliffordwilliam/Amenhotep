@@ -50,12 +50,18 @@ export default function UsersDetail() {
 
       {/* Display the user details if data is available */}
       {user && (
-        <ul>
-          <li key={user.id}>
-            <strong>{user.username}</strong>
-            <p>Email: {user.email}</p>
-          </li>
-        </ul>
+          <div className="card flex-0 m" key={user.id}>
+          <strong>{user.username}</strong>
+                            {/* Conditionally render the profile picture */}
+                  {user.profile_picture && (
+                    <img
+                      src={user.profile_picture}
+                      alt="Profile Picture"
+                    />
+                  )}
+                  <p>Email: {user.email}</p>
+                  <p>Bio: {user.bio}</p>
+          </div>
       )}
     </>
   );

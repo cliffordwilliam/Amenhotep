@@ -7,9 +7,9 @@ import Modal from '../components/Modal';
 export default function EditMyDetail() {
   const dispatch = useDispatch();
   const [newUsername, setNewUsername] = useState(localStorage.getItem('username') || '');
-  const [newBio, setNewBio] = useState(localStorage.getItem('bio') || '');
+  const [newBio, setNewBio] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [imgUrl, setimgUrl] = useState("")
+  const [imgUrl, setimgUrl] = useState('');
 
   const handleApiRequestComplete = (data, error) => {
     if (data) {
@@ -17,6 +17,16 @@ export default function EditMyDetail() {
       // update the local
       localStorage.setItem('username',data.user.username);
       localStorage.setItem('bio',data.user.bio);
+    } else {
+      // Handle error
+      // (nothing specific to do in this case)
+    }
+  };
+
+  const handlePatchApiRequestComplete = (data, error) => {
+    if (data) {
+      // Handle success
+      // update the local
       localStorage.setItem('profile_picture',data.user.profile_picture);
     } else {
       // Handle error
@@ -49,6 +59,10 @@ export default function EditMyDetail() {
           },
           data: requestBody,
         },
+        updateContentOnSuccess:true,
+        callbackArray: [
+          handleApiRequestComplete
+        ],
       })
     );
   };
@@ -75,8 +89,9 @@ export default function EditMyDetail() {
             Authorization: `Bearer ${localStorage.token}`,
           },
         },
+        updateContentOnSuccess:true,
         callbackArray: [
-          handleApiRequestComplete
+          handlePatchApiRequestComplete
         ],
       })
     );
@@ -84,7 +99,7 @@ export default function EditMyDetail() {
   
 
   return (
-    <div>
+    <div className='card m flex-0'>
       <h1>Edit My Detail</h1>
       <label htmlFor="newUsername">New Username:</label>
       <input
@@ -98,7 +113,7 @@ export default function EditMyDetail() {
       <textarea
         id="newBio"
         value={newBio}
-        onChange={(e) => setNewBio(e.target.value)}
+        onChange={(e) => {setNewBio(e.target.value);}}
       />
 
       <label htmlFor="newPassword">New Password:</label>

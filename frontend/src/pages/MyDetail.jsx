@@ -17,7 +17,7 @@ export default function MyDetail() {
     { label: 'User ID', value: userId },
     { label: 'Username', value: username },
     { label: 'Email', value: email },
-    { label: 'Profile Picture', value: profile_picture },
+    // { label: 'Profile Picture', value: profile_picture },
     { label: 'Bio', value: bio },
     { label: 'Credit', value: credit },
     { label: 'Created At', value: created_at },
@@ -25,10 +25,17 @@ export default function MyDetail() {
   ];
 
   return (
-    <>
+    <div className='card flex-0 m'>
       <Link to={`/editMyDetail`}>
         <button>Edit</button>
       </Link>
+      {/* Conditionally render the profile picture */}
+      {profile_picture && (
+                    <img
+                      src={profile_picture}
+                      alt="Profile Picture"
+                    />
+                  )}
       <ul>
         {/* Loop over userDetails and create an <li> for each user detail */}
         {userDetails.map((detail) => (
@@ -37,6 +44,6 @@ export default function MyDetail() {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

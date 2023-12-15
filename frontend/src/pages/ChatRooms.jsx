@@ -37,7 +37,7 @@ export default function ChatRooms() {
   }, [dispatch]);
 
   return (
-    <div>
+    <div className="card flex-0 m">
       <h1>Chat Rooms</h1>
       {chatRooms.length === 0 ? (
         <p>Loading...</p>

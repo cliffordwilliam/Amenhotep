@@ -7,20 +7,20 @@
 - ~~CRUD~~
 - ~~postgreSQL~~
 - ~~ORM sequelize~~
-- React.js
-- State Management
+- ~~React.js~~
+- ~~State Management~~
 - ~~Middleware~~
-- Social Media Login
+- ~~Social Media Login~~
 - Third party API (min 2)
-    - API key / token
-    - Package / library based
+    - ~~API key / token~~
+    - ~~Package / library based~~
     - https://github.com/public-apis/public-apis
     - https://rapidapi.com/search/
 - Theme: Chill
 - Use Github
-- Client-Server
-- Testing
-- API doc
+- ~~Client-Server~~
+- ~~Testing~~
+- ~~API doc~~
 - Main features:
     - Realtime (Firebase, Socket)
     - Mail sending (Nodemailer, Restdb mail)

@@ -38,7 +38,7 @@ export default function SpotifyAPIObserver(code) {
       client_secret: "12fbed6aadfd45089db0787369dfd7df",
       grant_type: 'authorization_code',
       code: code,
-      redirect_uri: "http://localhost:5173/spotify",
+      redirect_uri: "https://amenhotep-8ccvf23hu-cliffordwilliams-projects.vercel.app/spotify",
     };
 
     dispatch(APIrequest({
